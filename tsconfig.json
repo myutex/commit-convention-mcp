@@ -1,15 +1,43 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "Node16",
-    "moduleResolution": "Node16",
-    "outDir": "./build",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    /* Base Options: */
+    "target": "ES2022", // Specify ECMAScript target version
+    "lib": ["ES2022"], // Specify library files to be included in the compilation
+    "module": "preserve", // Preserve original import/export syntax for the bundler (tsup)
+    "moduleResolution": "Bundler", // Use Bundler resolution for tsup
+    "resolveJsonModule": true, // Enable importing .json files
+    // "sourceMap": true, // Handled by tsup
+    // "outDir": "./build", // Handled by tsup
+    // "rootDir": "./src", // Not strictly needed when using a bundler like tsup
+    "esModuleInterop": true, // Enable compatibility with CommonJS modules
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file.
+
+    /* Strict Type-Checking Options: */
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Raise error on expressions and declarations with an implied 'any' type. (Included in `strict`)
+    "strictNullChecks": true, // Enable strict null checks. (Included in `strict`)
+    "strictFunctionTypes": true, // Enable strict checking of function types. (Included in `strict`)
+    "strictBindCallApply": true, // Enable strict 'bind', 'call', and 'apply' methods on functions. (Included in `strict`)
+    "strictPropertyInitialization": true, // Enable strict checking of property initialization in classes. (Included in `strict`)
+    "noImplicitThis": true, // Raise error on 'this' expressions with an implied 'any' type. (Included in `strict`)
+    "useUnknownInCatchVariables": true, // Default catch clause variables as 'unknown' instead of 'any'. (Included in `strict` in TS 4.4+)
+    "alwaysStrict": true, // Parse in strict mode and emit "use strict" for each source file. (Included in `strict`)
+    "exactOptionalPropertyTypes": true, // Interpret optional property types as written, rather than adding 'undefined'.
+
+    /* Additional Checks: */
+    "noUnusedLocals": true, // Report errors on unused locals
+    "noUnusedParameters": true, // Report errors on unused parameters
+    "noImplicitReturns": true, // Report error when not all code paths in function return a value
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
+    "noImplicitOverride": true, // Ensure overriding members in derived classes are marked with an override modifier
+
+    /* Module Resolution Options: */
+    // "baseUrl": "./", // Base directory to resolve non-absolute module names (optional)
+    // "paths": {}, // Specify path mapping relative to 'baseUrl' (optional)
+
+    /* Completeness */
+    "skipLibCheck": true // Skip type checking of declaration files
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"], // Specifies files to include in the program
+  "exclude": ["node_modules"] // Specifies files to exclude from the program
 }
