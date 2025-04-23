@@ -13,6 +13,15 @@
     "url": "git+https://github.com/sk0x0y/commit-convention-mcp.git"
   },
   "license": "MIT",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "commit",
+    "convention",
+    "git",
+    "cli",
+    "server"
+  ],
   "private": false,
   "type": "module",
   "bin": {
