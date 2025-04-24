@@ -1,16 +1,58 @@
 import { defineConfig } from 'tsup';
+import fs from 'fs-extra';
+import path from 'path';
+import { OUTPUT_DIR, SOURCE_DIR_NAME, PROMPTS_DIR_NAME } from './src/constants';
+
+const ENTRY_POINT = 'src/index.ts';
+const OUTPUT_FORMAT = 'esm';
+const NODE_TARGET = 'node16';
+
+const LOG_BUILD_START_COPY = 'Build successful, copying prompts...';
+const LOG_COPY_SUCCESS = 'Prompts copied successfully!';
+const LOG_COPY_FAILURE = 'Failed to copy prompts:';
 
 export default defineConfig({
-  entry: ['src/index.ts'], // 진입점 파일 지정
-  format: ['esm'], // 출력 형식 (ECMAScript Module)
-  target: 'node16', // 대상 Node.js 버전 (tsconfig.json과 일치)
-  splitting: false, // 코드 분할 비활성화 (CLI는 단일 파일이 유리)
-  sourcemap: true, // 소스맵 생성 활성화
-  clean: true, // 빌드 전 출력 디렉토리 정리
-  dts: true, // 타입 선언 파일(.d.ts) 생성
-  treeshake: true, // 사용하지 않는 코드 제거 (Tree-shaking)
-  outDir: 'dist', // 출력 디렉토리 지정
-  shims: true, // ESM 환경에서 __dirname, __filename 등 사용 가능하도록 shim 추가
-  minify: false, // 코드 압축 비활성화 (Node.js CLI에서는 필수는 아님)
-  publicDir: 'src/prompts', // src/prompts 내용을 dist로 복사
+  entry: [ENTRY_POINT],
+  format: [OUTPUT_FORMAT],
+  target: NODE_TARGET,
+  splitting: false,
+  sourcemap: true,
+  clean: true,
+  dts: true,
+  treeshake: true,
+  outDir: OUTPUT_DIR,
+  shims: true,
+  minify: false,
+  async onSuccess() {
+    console.log(LOG_BUILD_START_COPY);
+    const sourceDir = path.resolve(
+      process.cwd(),
+      SOURCE_DIR_NAME,
+      PROMPTS_DIR_NAME,
+    );
+    const destDir = path.resolve(process.cwd(), OUTPUT_DIR, PROMPTS_DIR_NAME);
+
+    try {
+      if (!(await fs.pathExists(sourceDir))) {
+        console.error(`Source directory not found: ${sourceDir}`);
+        return;
+      }
+
+      await fs.ensureDir(destDir);
+
+      console.log(`Copying from ${sourceDir} to ${destDir}`);
+      await fs.copy(sourceDir, destDir);
+
+      if (await fs.pathExists(path.join(destDir, 'convention.md'))) {
+        console.log(`Verified: convention.md exists in ${destDir}`);
+        console.log(LOG_COPY_SUCCESS);
+      } else {
+        console.error(
+          `Warning: convention.md not found in destination after copy.`,
+        );
+      }
+    } catch (err) {
+      console.error(LOG_COPY_FAILURE, err);
+    }
+  },
 });
