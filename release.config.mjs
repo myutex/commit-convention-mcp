@@ -17,28 +17,17 @@ export default {
           { type: 'feat', release: 'minor' },
           { type: 'fix', release: 'patch' },
           { type: 'perf', release: 'patch' },
-          { type: 'build', release: 'patch' },
-          { type: 'refactor', release: 'patch' },
-          { type: 'chore', release: 'patch' },
-          { type: 'docs', release: 'patch' },
-          { type: 'build', release: 'patch' },
+          { type: 'build', release: false },
+          { type: 'refactor', release: false }, 
+          { type: 'chore', release: false }, 
+          { type: 'docs', release: false },
         ],
       },
     ],
     '@semantic-release/release-notes-generator',
     '@semantic-release/changelog',
     '@semantic-release/npm',
-    [
-      '@semantic-release/github',
-      {
-        assets: [
-          {
-            path: './dist',
-            label: 'Distribution Files',
-          },
-        ],
-      },
-    ],
+    '@semantic-release/github',
     [
       '@semantic-release/git',
       {
@@ -48,4 +37,5 @@ export default {
       },
     ],
   ],
+};
 };
