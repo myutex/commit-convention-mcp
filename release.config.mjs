@@ -18,8 +18,8 @@ export default {
           { type: 'fix', release: 'patch' },
           { type: 'perf', release: 'patch' },
           { type: 'build', release: false },
-          { type: 'refactor', release: false }, 
-          { type: 'chore', release: false }, 
+          { type: 'refactor', release: false },
+          { type: 'chore', release: false },
           { type: 'docs', release: false },
         ],
       },
@@ -37,5 +37,4 @@ export default {
       },
     ],
   ],
-};
 };
