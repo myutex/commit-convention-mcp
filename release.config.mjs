@@ -15,11 +15,27 @@ export default {
         preset: 'conventionalcommits',
         releaseRules: [
           { type: 'feat', release: 'minor' },
+
           { type: 'fix', release: 'patch' },
+
           { type: 'perf', release: 'patch' },
+
           { type: 'build', release: false },
-          { type: 'refactor', release: false },
+
+          { type: 'refactor', release: 'patch' },
+
           { type: 'chore', release: false },
+          { type: 'chore', scope: 'release', release: 'patch' },
+          { type: 'chore', scope: 'deps', release: 'patch' },
+
+          { type: 'style', release: false },
+
+          { type: 'ci', release: false },
+
+          { type: 'test', release: false },
+
+          { type: 'bump', release: 'patch' },
+
           { type: 'docs', release: false },
         ],
       },
