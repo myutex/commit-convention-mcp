@@ -30,12 +30,7 @@ export default {
         preset: 'conventionalcommits',
       },
     ],
-    [
-      '@semantic-release/changelog',
-      {
-        changelogFile: 'docs/CHANGELOG.md',
-      },
-    ],
+    '@semantic-release/changelog',
     '@semantic-release/npm',
     '@semantic-release/github',
     [
