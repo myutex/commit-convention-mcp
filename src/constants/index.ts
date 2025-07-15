@@ -1,5 +1,5 @@
 export const SERVER_NAME = '@myutex/commit-convention-mcp';
-export const SERVER_VERSION = process.env.npm_package_version;
+export const SERVER_VERSION = process.env.npm_package_version || '1.0.6';
 
 export const PROMPTS_DIR_NAME = 'prompts';
 export const PROMPT_FILE_NAME = 'convention.md';
